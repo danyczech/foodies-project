@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import { getMeal } from '@/lib/meals';
 import styles from './page.module.css';
 
-const MealDetailsPage = ({params}) => {
-    const meal = getMeal(params.mealSlug);
+const MealDetailsPage = ({params}) => {  //params come with next
+    const meal = getMeal(params.mealSlug); //mealSlug is the name of the folder in []
 
     if (!meal) { //if true, stops there and shows the closest error page
         notFound();
