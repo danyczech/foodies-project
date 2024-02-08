@@ -1,19 +1,9 @@
 import ImagePicker from '@/components/meals/image-picker';
+import MealsFormSubmit from '@/components/meals/meals-form-submit';
+import {shareMeal} from '@/lib/actions'; //I can import server action to the client side component
 import styles from './page.module.css';
 
-export default function ShareMealPage() {
-  async function shareMeal(formData) { //+ action property in form element
-    'use server'; //it executes only on server
-
-    const meal = {
-      title: formData.get('title'), //connected via name property in input element
-      summary: formData.get('summary'),
-      instructions: formData.get('instructions'),
-      image: formData.get('image'),
-      creator: formData.get('name'),
-      creator_email: formData.get('email')
-    }
-  }
+export default function ShareMealPage() {  
 
   return (
     <>
@@ -54,7 +44,7 @@ export default function ShareMealPage() {
           </p>
           <ImagePicker label="Your image" name="image" />
           <p className={styles.actions}>
-            <button type="submit">Share Meal</button>
+            <MealsFormSubmit />
           </p>
         </form>
       </main>
