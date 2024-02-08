@@ -3,13 +3,26 @@ import { notFound } from 'next/navigation';
 import { getMeal } from '@/lib/meals';
 import styles from './page.module.css';
 
+export async function generateMetadata({params}) {
+    const meal = getMeal(params.mealSlug);
+
+    if (!meal) { //if true, stops there and shows the closest error page
+        notFound();
+    }
+
+    return {
+        title: meal.title,
+        description: meal.summary
+    }
+}
+
 const MealDetailsPage = ({params}) => {  //params come with next
     const meal = getMeal(params.mealSlug); //mealSlug is the name of the folder in []
 
     if (!meal) { //if true, stops there and shows the closest error page
         notFound();
     }
-
+    
     meal.instructions = meal.instructions.replace(/\n/g, '<br />');
 
     return <>
